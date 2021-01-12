@@ -47,3 +47,5 @@ luac.out
 
 # TXT
 *.txt
+
+/RRIncHealPrompt

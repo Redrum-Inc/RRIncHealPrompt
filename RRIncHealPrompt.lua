@@ -3,7 +3,6 @@ local addonVersion = ""
 local messagePrefix = ""
 
 local addonChannel = "RRIncAfraPower"
-local monitorActive = false
 
 
 function ShowHealOrder(number)
@@ -80,6 +79,10 @@ function IncomingMessage(...)
             ShowHealPrompt()
         end
 
+        if action == "DONE" and targetPlayer == playerName then
+            HideHealPrompt()
+        end
+
         if action == "SKIP" and targetPlayer == playerName then
             HideHealPrompt()
         end
@@ -105,25 +108,3 @@ RRIncHealPrompt_FrameEnterWorld:SetScript("OnEvent", EventEnterWorld)
 local RRIncHealPrompt_IncomingMessage = CreateFrame("Frame")
 RRIncHealPrompt_IncomingMessage:RegisterEvent("CHAT_MSG_ADDON")
 RRIncHealPrompt_IncomingMessage:SetScript("OnEvent", IncomingMessage)
-
--- Event for Combat log
-local RRIncHealPrompt_CombatlogFrame = CreateFrame("Frame")
-RRIncHealPrompt_CombatlogFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-RRIncHealPrompt_CombatlogFrame:SetScript("OnEvent", function(self, event, ...)
-	local timestamp, type, hideCaster, sourceGUID, sourceName, sourceFlags, sourceFlags2, destGUID, destName, destFlags, destFlags2, spellId, spellName, spellSchool, amount, overkill = CombatLogGetCurrentEventInfo()
-   
-    if not monitorActive then
-        return
-    end       
-
-    if type == "SPELL_HEAL" then
-        -- print(sourceName, type, destName)
-        local playerName = select(6, GetPlayerInfoByGUID(UnitGUID("PLAYER")))
-        if playerName == sourceName then            
-            SendAddonMessageHandler("HEAL_"..sourceName.."_"..destName.."_"..spellName.."_"..amount.."_"..overkill)
-            HideHealPrompt()
-            -- print(messagePrefix, type, sourceName, destName, spellName, "|cFF5CB85C"..amount.."|r", "|cFFE2252D"..overkill.."|r")
-        end
-	end   
-	
-end)
