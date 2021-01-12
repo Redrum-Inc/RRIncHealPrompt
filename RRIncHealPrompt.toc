@@ -1,11 +1,7 @@
 ## Interface: 11306
 ## Version: 1
 ## Title: |cFF323232RR|r|cFF7F7F7FInc|r |cFF128665Heal Prompt|r
-## Notes: Some addon.
+## Notes: Addon for RR Inc healers. Will prompt them when it's their turn to heal.
 ## Author: Pug
-## DefaultState: enabled
-# SavedVariables: rriapOptionHealOrder, rriapHealOrder, rriapOptionAnnounce
 
-# Libraries\Load_Libraries.xml
-# optionsGUI.lua
 RRIncHealPrompt.lua

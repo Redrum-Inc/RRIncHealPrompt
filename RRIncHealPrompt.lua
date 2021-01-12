@@ -4,18 +4,10 @@ local messagePrefix = ""
 
 local addonChannel = "RRIncAfraPower"
 
-
+-- Not implemented yet.
 function ShowHealOrder(number)
     StaticPopupDialogs["RRIncHealOrder"] = {
 		text = "You are healer #"..number..", wait for popup telling you it's your turn to heal!",
-		-- button1 = "Ok",
-		-- button2 = "No",
-		-- OnAccept = function()
-		-- 	SendChatMessage("yes","RAID","COMMON");
-		-- end,
-		-- OnCancel = function()
-		-- 	SendChatMessage("no","RAID","COMMON");
-		-- end,
 		timeout = 3,
 		whileDead = true,
 		hideOnEscape = false,
